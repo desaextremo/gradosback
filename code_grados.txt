@@ -1,0 +1,129 @@
+Paso 1 - clase vacia
+
+package com.atenea.grados.controller;
+public class GradosController {
+
+}
+------------------------------------------------------------------------
+Paso 2 - Calse con anotaciones para controlador, nombre unificado y control CORDS
+
+package com.atenea.grados.controller;
+
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * Controlador rest para convertir tempratura
+ * expresada en grados
+ * @author desaextremo
+ */
+@RestController
+@RequestMapping("/grados")
+@CrossOrigin(origins = "*")
+public class GradosController {
+
+}
+------------------------------------------------------------------------
+Paso 3 - Agregando metodos
+
+package com.atenea.grados.controller;
+
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * Controlador rest para convertir tempratura
+ * expresada en grados
+ * @author desaextremo
+ */
+@RestController
+@RequestMapping("/grados")
+@CrossOrigin(origins = "*")
+public class GradosController {
+
+    public double centigradosAFarenheit(@PathVariable("grades") double gradosEnCentigrados){
+        double resultado;
+        resultado = (9f / 5f) * (gradosEnCentigrados + 32);
+        return resultado;
+    }
+
+    public double farenheitACentigrados(@PathVariable("grades") double gradosEnFarenheit){
+        double resultado;
+        resultado = (5f /9f) * (gradosEnFarenheit - 32);
+        return resultado;
+    }
+
+    public double centigradosAKelvin(@PathVariable("grades") double gradosEnCentigrados){
+        double resultado;
+        resultado = gradosEnCentigrados + 273;
+        return resultado;
+    }
+
+    public double kelvinACentigrados(@PathVariable("grades") double gradosEnKelvin){
+        double resultado;
+        resultado = gradosEnKelvin - 273;
+        return resultado;
+    }
+}
+------------------------------------------------------------------------
+Paso 4 - Agregando Anotaciones a nuestros métodos
+
+package com.atenea.grados.controller;
+
+import org.springframework.web.bind.annotation.*;
+
+/**
+ * Controlador rest para convertir tempratura
+ * expresada en grados
+ * @author desaextremo
+ */
+@RestController
+@RequestMapping("/grados")
+@CrossOrigin(origins = "*")
+public class GradosController {
+    /**
+     * Convertir grados centigrados a grados farenheit
+     * @param gradosEnCentigrados grados en unidades centigrados
+     * @return grados en unidades farenheit
+     */
+    @GetMapping("/centofarenh/{grades}")
+    public double centigradosAFarenheit(@PathVariable("grades") double gradosEnCentigrados){
+        double resultado;
+        resultado = (9f / 5f) * (gradosEnCentigrados + 32);
+        return resultado;
+    }
+
+    /**
+     * Convertir grados farenheit a grados centigrados
+     * @param gradosEnFarenheit grados en unidades farenheit
+     * @return grados en unidades centigrados
+     */
+    @GetMapping("/farenhyocent/{grades}")
+    public double farenheitACentigrados(@PathVariable("grades") double gradosEnFarenheit){
+        double resultado;
+        resultado = (5f /9f) * (gradosEnFarenheit - 32);
+        return resultado;
+    }
+
+    /**
+     * Convertir grados centigrados a grados kelvin
+     * @param gradosEnCentigrados grados en unidades centigrados
+     * @return grados en unidades kelvin
+     */
+    @GetMapping("/centokelvin/{grades}")
+    public double centigradosAKelvin(@PathVariable("grades") double gradosEnCentigrados){
+        double resultado;
+        resultado = gradosEnCentigrados + 273;
+        return resultado;
+    }
+
+    /**
+     * Convertir grados centigrados a grados kelvin
+     * @param gradosEnKelvin grados en unidades centigrados
+     * @return grados en unidades centigrados
+     */
+    @GetMapping("/kelvintocent/{grades}")
+    public double kelvinACentigrados(@PathVariable("grades") double gradosEnKelvin){
+        double resultado;
+        resultado = gradosEnKelvin - 273;
+        return resultado;
+    }
+}
